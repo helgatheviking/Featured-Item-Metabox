@@ -1,8 +1,7 @@
 <?php
-
 /*
-Plugin Name: Featured Items Metabox
-Plugin URI:
+Plugin Name: Featured Item Metabox
+Plugin URI: http://wordpress.org/extend/plugins/featured-item-metabox/
 Description: Add featured meta to any post type
 Version: 1.0
 Author: Kathy Darling

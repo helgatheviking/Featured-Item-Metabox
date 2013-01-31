@@ -1,4 +1,4 @@
-=== Featured Items Metabox ===
+=== Featured Item Metabox ===
 Contributors: helgatheviking
 Donate link: https://inspirepay.com/pay/helgatheviking
 Tags: metabox, featured
