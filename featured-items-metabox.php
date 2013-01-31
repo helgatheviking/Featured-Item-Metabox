@@ -4,7 +4,7 @@
 Plugin Name: Featured Items Metabox
 Plugin URI:
 Description: Add featured meta to any post type
-Version: 1.2.2
+Version: 1.0
 Author: Kathy Darling
 Author URI: http://www.kathyisawesome.com
 License: GPL2
