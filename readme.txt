@@ -1,7 +1,7 @@
 === Featured Items Metabox ===
 Contributors: helgatheviking
 Donate link: https://inspirepay.com/pay/helgatheviking
-Tags: subtitle, simple
+Tags: metabox, featured
 Requires at least: 3.4
 Tested up to: 3.5
 Stable tag: 1.0

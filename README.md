@@ -1,34 +1,35 @@
-=== Featured Items Metabox ===
-Contributors: helgatheviking
-Donate link: https://inspirepay.com/pay/helgatheviking
-Tags: subtitle, simple
-Requires at least: 3.4
-Tested up to: 3.5
-Stable tag: 1.0
-License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+#Featured Items Metabox
+
+Contributors: helgatheviking  return
+Donate link: https://inspirepay.com/pay/helgatheviking  return
+Tags: metabox, featured  return
+Requires at least: 3.4  return
+Tested up to: 3.5  return
+Stable tag: 1.0  return
+License: GPLv2 or later  return
+License URI: http://www.gnu.org/licenses/gpl-2.0.html  return
 
 Quickly add a metabox to any post type for marking a post as featured.  Toggle featured status even more quickly from the posts lists/ quick edit screen.
 
-== Description ==
+## Description
 
 I found I constantly needed a way for clients to mark a post as something they wanted to feature and I've never found sticky posts particularly inuitive and the UI is pretty hidden for new users.  The simplest solution was a checkbox in prominently located metabox.
 
 Please note that this plugin, by itself, will not change how your posts are displayed.  It just gives the UI to users and a meta key to theme developers to query for.
 
-== Installation ==
+## Installation
 
 1. Upload the `plugin` folder to the `/wp-content/plugins/` directory
 1. Activate the plugin through the 'Plugins' menu in WordPress
 1. Go to the plugin's settings and select which post types for which you'd like to show the featured metabox
 
-== Screenshots ==
+## Screenshots
 
 1. The plugin settings
 1. Posts overview. Featured status can be changed via quickedit, or by simply clicking on the star icon.  Dark stars are featured whereas hollow stars are not.
 1. The metabox when editing an individual post
 
-== Usage ==
+## Usage
 
 This plugin simply adds a `_featured` meta key to every post with a value of `yes` for featured items and `no` for everything else.  Actual display of the featured items is entirely up to the theme developer, but an example ( place in your template where you'd like to display a list of featured "Portfolios") might be as follows:
 
@@ -92,6 +93,5 @@ function save_post_delete_featured_transient( $post_id ) {
 add_action( 'save_post', 'save_post_delete_featured_transient' );
 ```
 
-Simple queries should only need the `meta_key` and `meta_value` parameters, but if you need something more advanced then you might want to read about how to use the more complex Meta Query parameters:
+Simple queries should only need the `meta_key` and `meta_value` parameters, but if you need something more advanced then you might want to [read about how to use the more complex Meta Query](http://scribu.net/wordpress/advanced-metadata-queries.html)
 
-http://scribu.net/wordpress/advanced-metadata-queries.html
