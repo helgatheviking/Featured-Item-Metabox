@@ -99,8 +99,3 @@ http://scribu.net/wordpress/advanced-metadata-queries.html
 == Bug Reporting ==
 
 Please report any issues at: https://github.com/helgatheviking/Featured-Item-Metabox/issues
-
-== Changelog ==
-
-= 1.0 =
-* Initial release.
