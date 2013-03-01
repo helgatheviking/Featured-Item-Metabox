@@ -49,7 +49,7 @@ This plugin simply adds a `_featured` meta key to every post with a value of `ye
 		$featured_portfolios = new WP_Query( $args );
 
 		// store the transient
-		set_transient( 'featured_portfolios', $featured_portfolios, 12 * HOUR_IN_SECONDS );
+		set_transient( 'featured_portfolios', $featured_portfolios );
 
 	}
 
