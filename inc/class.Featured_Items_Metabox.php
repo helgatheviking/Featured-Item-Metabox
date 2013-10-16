@@ -14,25 +14,25 @@ class Featured_Items_Metabox {
 		$this->type = $type;
 
 		//get the taxonomy object - need to get it after init but before admin_menu
-		add_action( 'wp_loaded', array( &$this, 'get_post_type_object' ) );
+		add_action( 'wp_loaded', array( $this, 'get_post_type_object' ) );
 
 		//Add new taxonomy meta box
-		add_action( 'add_meta_boxes', array( &$this, 'add_meta_box' ) );
+		add_action( 'add_meta_boxes', array( $this, 'add_meta_box' ) );
 
 		//Ajax callback for setting as featured
-		add_action( 'wp_ajax_featured_items_quickedit', array( &$this, 'ajax_callback' ) );
+		add_action( 'wp_ajax_featured_items_quickedit', array( $this, 'ajax_callback' ) );
 
 		//add columns to the edit screen
-		add_filter( 'admin_init', array( &$this, 'add_columns_init' ), 20 );
+		add_filter( 'admin_init', array( $this, 'add_columns_init' ), 20 );
 
 		//save featured meta
-		add_action( 'save_post', array( &$this, 'save_meta' ) );
+		add_action( 'save_post', array( $this, 'save_meta' ) );
 
 		//add to quick edit - irrelevant for wp 3.4.2
-		add_action( 'quick_edit_custom_box', array( &$this, 'quick_edit_custom_box' ), 10, 2);
+		add_action( 'quick_edit_custom_box', array( $this, 'quick_edit_custom_box' ), 10, 2);
 
 		//add quick edit scripts
-      add_action( 'admin_enqueue_scripts', array( &$this, 'admin_script' ) );
+      add_action( 'admin_enqueue_scripts', array( $this, 'admin_script' ) );
 
 
 	}
@@ -56,7 +56,7 @@ class Featured_Items_Metabox {
 
 		if( ! is_wp_error( $this->type_obj ) ):
 			$label = __( 'Featured Item', 'featured-items-metabox' );
-			add_meta_box( '_featured_metabox', $label ,array( &$this,'metabox' ), $type->name ,'side','high' );
+			add_meta_box( '_featured_metabox', $label ,array( $this,'metabox' ), $type->name ,'side','high' );
 		endif;
 	}
 
@@ -170,10 +170,10 @@ class Featured_Items_Metabox {
 		if ( isset( $screen->base ) && 'edit' != $screen->base ) return;
 
 			//add some hidden data that we'll need for the quickedit
-			add_filter( "manage_{$this->type}_posts_columns", array( &$this, 'add_column' ) );
-			add_action( "manage_{$this->type}_posts_custom_column", array( &$this, 'custom_column' ), 99, 2);
-			add_filter( "manage_edit-{$this->type}_sortable_columns", array( &$this, 'register_sortable' ) );
-			add_filter( 'request', array( &$this, 'column_orderby' ) );
+			add_filter( "manage_{$this->type}_posts_columns", array( $this, 'add_column' ) );
+			add_action( "manage_{$this->type}_posts_custom_column", array( $this, 'custom_column' ), 99, 2);
+			add_filter( "manage_edit-{$this->type}_sortable_columns", array( $this, 'register_sortable' ) );
+			add_filter( 'request', array( $this, 'column_orderby' ) );
 
 	}
 

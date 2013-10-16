@@ -42,7 +42,7 @@ if ( ! class_exists( "Featured_Items" ) ) :
 	    register_uninstall_hook( __FILE__, array( __CLASS__,'delete_plugin_options' ) );
 
 	    //load plugin text domain for translations
-	    add_action( 'plugins_loaded', array( &$this,'load_text_domain' ) );
+	    add_action( 'plugins_loaded', array( $this,'load_text_domain' ) );
 
       //create a class property for each taxonomy that we are converting to radio buttons
       //for example: $this->categories
@@ -53,19 +53,19 @@ if ( ! class_exists( "Featured_Items" ) ) :
       }
 
 	    //register settings
-	    add_action( 'admin_init', array( &$this,'admin_init' ) );
+	    add_action( 'admin_init', array( $this,'admin_init' ) );
 
 	    //add plugin options page
-	    add_action( 'admin_menu', array( &$this,'add_options_page' ) );
+	    add_action( 'admin_menu', array( $this,'add_options_page' ) );
 
 	    //add settings link to plugins page
-	    add_filter( 'plugin_action_links', array( &$this,'add_action_links' ), 10, 2 );
+	    add_filter( 'plugin_action_links', array( $this,'add_action_links' ), 10, 2 );
 
     }
 
 
   // --------------------------------------------------------------------------------------
-  // CALLBACK FUNCTION FOR: register_uninstall_hook(__FILE__,  array(&$this,'delete_plugin_options'))
+  // CALLBACK FUNCTION FOR: register_uninstall_hook(__FILE__,  array($this,'delete_plugin_options'))
   // --------------------------------------------------------------------------------------
 
   // Delete options table entries ONLY when plugin deactivated AND deleted
@@ -75,7 +75,7 @@ if ( ! class_exists( "Featured_Items" ) ) :
   }
 
   // ------------------------------------------------------------------------------
-  // CALLBACK FUNCTION FOR: add_action('plugins_loaded', array(&$this,'load_text_domain' ))
+  // CALLBACK FUNCTION FOR: add_action('plugins_loaded', array($this,'load_text_domain' ))
   // ------------------------------------------------------------------------------
 
     function load_text_domain() {
@@ -88,7 +88,7 @@ if ( ! class_exists( "Featured_Items" ) ) :
 
   // Init plugin options to white list our options
   function admin_init(){
-    register_setting( 'featured_items_metabox_options', 'featured_items_metabox_options', array( &$this,'validate_options' ) );
+    register_setting( 'featured_items_metabox_options', 'featured_items_metabox_options', array( $this,'validate_options' ) );
   }
 
 
@@ -98,7 +98,7 @@ if ( ! class_exists( "Featured_Items" ) ) :
 
   // Add menu page
   function add_options_page() {
-    add_options_page(__( 'Featured Items Metabox Options Page',"featured-items-metabox" ), __( 'Featured Items Metabox', "featured-items-metabox" ), 'manage_options', 'featured-items-metabox', array( &$this,'render_form' ) );
+    add_options_page(__( 'Featured Items Metabox Options Page',"featured-items-metabox" ), __( 'Featured Items Metabox', "featured-items-metabox" ), 'manage_options', 'featured-items-metabox', array( $this,'render_form' ) );
   }
 
 
