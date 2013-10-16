@@ -209,7 +209,13 @@ class Featured_Items_Metabox {
 
 		switch ( $column ) {
 			case "featured":
-				$url = wp_nonce_url( admin_url( 'admin-ajax.php?action=featured_items_quickedit&featured_id=' . $post_id . '&post_type='. $this->type ), 'featured-items-metabox' );
+
+				$ajax_url = add_query_arg( array('action' => 'featured_items_quickedit',
+									'featured_id' => $post_id,
+									'post_type' => $this->type ), admin_url('admin-ajax.php') );
+
+				$url = wp_nonce_url( $ajax_url, 'featured-items-metabox' );
+
 				echo '<a href="' . $url . '" title="'. __( 'Toggle featured', 'featured-items-metabox' ) . '">';
 				if ( 'yes' == ( $featured = get_post_meta ( $post_id, '_featured', true ) ) ) {
 					echo '<img src="' . plugins_url( 'images/featured.png', __FILE__ ) . '" alt="'. __( 'yes', 'featured-items-metabox' ) . '" height="14" width="14" />';
