@@ -123,37 +123,48 @@ class Featured_Items_Metabox {
 	 *
 	 * @access public
 	 * @return void
+	 * Props to WooTheme's WooCommerce
 	 */
 	function ajax_callback() {
 
-		if ( ! is_admin() ) die;
+		if ( ! is_admin() )
+			die();
 
+	  	if ( ! check_admin_referer('featured-items-metabox')) wp_die( __( 'You have taken too long. Please go back and retry.', 'featured-items-metabox' ) );
+
+	  	// get the post ID
 		$post_id = isset( $_GET['featured_id'] ) && (int) $_GET['featured_id'] ? (int) $_GET['featured_id'] : '';
 
-		if ( !$post_id ) die();
+		// get the post type
+		$post_type = isset( $_GET['post_type'] ) ? $_GET['post_type']: '';
+
+		if ( ! $post_id || ! $post_type )
+			die();
 
 		// Check permissions
-	  	if ( 'page' == $_POST['post_type'] ) {
+	  	if ( 'page' == $post_type ) {
 	    	if ( ! current_user_can( 'edit_page', $post_id ) ) wp_die( __( 'You do not have sufficient permissions to access this page.', 'featured-items-metabox' ) );
 	  	} else {
 	    	if ( ! current_user_can( 'edit_post', $post_id ) ) wp_die( __( 'You do not have sufficient permissions to access this page.', 'featured-items-metabox' ) );
 	  	}
 
-		if ( ! check_admin_referer('featured-items-metabox')) wp_die( __( 'You have taken too long. Please go back and retry.', 'featured-items-metabox' ) );
+	  	$options = get_option('featured_items_metabox_options', false );
+		$types = isset($options['types']) ? $options['types'] : array();
 
+		if ( ! in_array( $post_type, $types ) )
+			die();
 
-		$post = get_post($post_id);
-
-		if ( ! $post || $post->post_type !== $this->type ) die();
-
-		$featured = get_post_meta( $post->ID, '_featured', true );
+		// since it is 'toggle' get the featured status and set to opposite
+		$featured = get_post_meta( $post_id, '_featured', true );
 
 		if ( $featured == 'yes' )
-			update_post_meta($post->ID, '_featured', 'no');
+			update_post_meta( $post_id, '_featured', 'no');
 		else
-			update_post_meta($post->ID, '_featured', 'yes');
+			update_post_meta( $post_id, '_featured', 'yes');
 
+		// redirect back to where we came from
 		wp_safe_redirect( remove_query_arg( array('trashed', 'untrashed', 'deleted', 'ids'), wp_get_referer() ) );
+
 	}
 
 
@@ -198,7 +209,7 @@ class Featured_Items_Metabox {
 
 		switch ( $column ) {
 			case "featured":
-				$url = wp_nonce_url( admin_url( 'admin-ajax.php?action=featured_items_quickedit&featured_id=' . $post_id ), 'featured-items-metabox' );
+				$url = wp_nonce_url( admin_url( 'admin-ajax.php?action=featured_items_quickedit&featured_id=' . $post_id . '&post_type='. $this->type ), 'featured-items-metabox' );
 				echo '<a href="' . $url . '" title="'. __( 'Toggle featured', 'featured-items-metabox' ) . '">';
 				if ( 'yes' == ( $featured = get_post_meta ( $post_id, '_featured', true ) ) ) {
 					echo '<img src="' . plugins_url( 'images/featured.png', __FILE__ ) . '" alt="'. __( 'yes', 'featured-items-metabox' ) . '" height="14" width="14" />';
