@@ -1,13 +1,13 @@
 #Featured Items Metabox
 
-Contributors: helgatheviking  return
-Donate link: https://inspirepay.com/pay/helgatheviking  return
-Tags: metabox, featured  return
-Requires at least: 3.4  return
-Tested up to: 3.5  return
-Stable tag: 1.0.1  return
-License: GPLv2 or later  return
-License URI: http://www.gnu.org/licenses/gpl-2.0.html  return
+Contributors: helgatheviking
+Donate link: https://inspirepay.com/pay/helgatheviking
+Tags: metabox, featured
+Requires at least: 3.5
+Tested up to: 3.6.1
+Stable tag: 1.1
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Quickly add a metabox to any post type for marking a post as featured.  Toggle featured status even more quickly from the posts lists/ quick edit screen.
 

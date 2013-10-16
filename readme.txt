@@ -2,9 +2,9 @@
 Contributors: helgatheviking
 Donate link: https://inspirepay.com/pay/helgatheviking
 Tags: metabox, featured
-Requires at least: 3.4
-Tested up to: 3.5
-Stable tag: 1.0.1
+Requires at least: 3.5
+Tested up to: 3.6.1
+Stable tag: 1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -101,6 +101,9 @@ http://scribu.net/wordpress/advanced-metadata-queries.html
 Please report any issues at: https://github.com/helgatheviking/Featured-Item-Metabox/issues
 
 == Changelog ==
+
+= 1.1 =
+* fix whitescreen bug on ajax action for edit columns
 
 = 1.0.1 =
 * fix markdown for changelog
