@@ -2,9 +2,9 @@
 Contributors: helgatheviking
 Donate link: https://inspirepay.com/pay/helgatheviking
 Tags: metabox, featured
-Requires at least: 3.5
-Tested up to: 3.6.1
-Stable tag: 1.1
+Requires at least: 3.7.1
+Tested up to: 3.7.1
+Stable tag: 1.1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -39,7 +39,7 @@ This plugin simply adds a `_featured` meta key to every post with a value of `ye
 
 	   // params for our query
 		$args = array(
-			'post_type' => 'portfolio'
+			'post_type' => 'portfolio',
 		   'posts_per_page'  => 5,
 		   'meta_key'        => '_featured',
 		   'meta_value'      => 'yes'
@@ -101,6 +101,12 @@ http://scribu.net/wordpress/advanced-metadata-queries.html
 Please report any issues at: https://github.com/helgatheviking/Featured-Item-Metabox/issues
 
 == Changelog ==
+
+= 1.1.2 =
+* php strict standards for static variables
+
+= 1.1.1 =
+* update FAQ
 
 = 1.1 =
 * fix whitescreen bug on ajax action for edit columns

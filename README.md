@@ -3,9 +3,9 @@
 Contributors: helgatheviking
 Donate link: https://inspirepay.com/pay/helgatheviking
 Tags: metabox, featured
-Requires at least: 3.5
-Tested up to: 3.6.1
-Stable tag: 1.1
+Requires at least: 3.7.1
+Tested up to: 3.7.1
+Stable tag: 1.1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -40,7 +40,7 @@ if ( false === ( $featured_portfolios = get_transient( 'featured_portfolios' ) )
 
    // params for our query
 	$args = array(
-		'post_type' => 'portfolio'
+		'post_type' => 'portfolio',
 	   'posts_per_page'  => 5,
 	   'meta_key'        => '_featured',
 	   'meta_value'      => 'yes'

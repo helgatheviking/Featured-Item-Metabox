@@ -6,8 +6,8 @@ if( ! class_exists( 'Featured_Items_Metabox' ) ) :
 
 class Featured_Items_Metabox {
 
-	static $taxonomy = null;
-	static $type_obj = null;
+	public $taxonomy = null;
+	public $type_obj = null;
 
 	public function __construct( $type ){
 
