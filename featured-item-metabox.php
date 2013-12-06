@@ -3,7 +3,7 @@
 Plugin Name: Featured Item Metabox
 Plugin URI: http://wordpress.org/extend/plugins/featured-item-metabox/
 Description: Add featured meta to any post type
-Version: 1.1.2
+Version: 1.1.3
 Author: Kathy Darling
 Author URI: http://www.kathyisawesome.com
 License: GPL2
@@ -29,9 +29,9 @@ License: GPL2
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 
-if ( ! class_exists( "Featured_Items" ) ) :
+if ( ! class_exists( 'Featured_Items_Metabox_Plugin' ) ) :
 
-  class Featured_Items {
+  class Featured_Items_Metabox_Plugin {
 
   	function __construct(){
 
@@ -148,4 +148,4 @@ endif;
 * Launch the whole plugin
 */
 global $Featured_Items;
-$Featured_Items = new Featured_Items();
+$Featured_Items = new Featured_Items_Metabox_Plugin();
