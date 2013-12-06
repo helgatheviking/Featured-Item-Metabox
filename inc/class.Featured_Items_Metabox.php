@@ -91,10 +91,15 @@ class Featured_Items_Metabox {
 	function save_meta ( $post_id ) {
 
 		// make sure we're on a supported post type
-	    if ( is_array( $this->type_obj->object_type ) && isset( $_POST['post_type'] ) && ! array_key_exists( $_POST['post_type'], $this->type_obj->object_type ) ) return;
+		$options = get_option('featured_items_metabox_options', false);
+	    $types = isset($options['types']) ? $options['types'] : array();
+
+		if ( ! isset( $_POST['post_type'] ) || ! in_array( $_POST['post_type'], $types ) )
+			return;
 
     	// verify this came from our plugin
-	 	if ( ! isset( $_POST["_featured_nonce"]) && ! wp_verify_nonce( $_POST["_featured_nonce"], "featured_nonce" ) ) return;
+	 	if ( ! isset( $_POST['_featured_nonce'] ) || ! wp_verify_nonce( $_POST['_featured_nonce'], 'featured_nonce' ) ) 
+	 		return;
 
 	  	// verify if this is an auto save routine. If it is our form has not been submitted, so we dont want to do anything
 	  	if ( defined('DOING_AUTOSAVE') && DOING_AUTOSAVE )
@@ -102,18 +107,19 @@ class Featured_Items_Metabox {
 
 	  	// Check permissions
 	  	if ( 'page' == $_POST['post_type'] ) {
-	    	if ( ! current_user_can( 'edit_page', $post_id ) ) return;
+	    	if ( ! current_user_can( 'edit_page', $post_id ) ) 
+	    		return;
 	  	} else {
-	    	if ( ! current_user_can( 'edit_post', $post_id ) ) return;
+	    	if ( ! current_user_can( 'edit_post', $post_id ) ) 
+	    		return;
 	  	}
 
 	  	// OK, we're authenticated: we need to find and save the data
-	  	if ( isset ( $_POST["featured"] ) && 1 == $_POST["featured"] ) {
+	  	if ( isset ( $_POST['featured'] ) && 1 == $_POST['featured'] )
 	  		update_post_meta( $post_id, '_featured', 'yes' );
-	  	} else {
+	  	else
 	  		update_post_meta( $post_id, '_featured', 'no' );
-	  	}
-
+	  	
 		return $post_id;
 	}
 
@@ -305,7 +311,8 @@ class Featured_Items_Metabox {
     	$screen = get_current_screen();
     	$options = get_option('featured_items_metabox_options', false);
 
-    	if ( $screen->base != "edit" ||  ! isset( $options['types'] ) || ! in_array( $screen->post_type, $options ) ) return;
+    	if ( $screen->base != "edit" ||  ! isset( $options['types'] ) || ! in_array( $screen->post_type, $options ) ) 
+    		return;
 
       wp_enqueue_script( 'featured-item', plugins_url( 'js/featureditem.js', dirname(__FILE__) ), array( 'jquery' ), null, true );
 
