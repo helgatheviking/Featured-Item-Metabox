@@ -8,6 +8,7 @@ class Featured_Items_Metabox {
 
 	public $taxonomy = null;
 	public $type_obj = null;
+	public $type = null;
 
 	public function __construct( $type ){
 
@@ -32,7 +33,7 @@ class Featured_Items_Metabox {
 		add_action( 'quick_edit_custom_box', array( $this, 'quick_edit_custom_box' ), 10, 2);
 
 		//add quick edit scripts
-      add_action( 'admin_enqueue_scripts', array( $this, 'admin_script' ) );
+ 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_script' ) );
 
 
 	}
@@ -53,10 +54,9 @@ class Featured_Items_Metabox {
 	 * @since 1.0
 	 */
 	public function add_meta_box() {
-
 		if( ! is_wp_error( $this->type_obj ) ):
 			$label = __( 'Featured Item', 'featured-items-metabox' );
-			add_meta_box( '_featured_metabox', $label ,array( $this,'metabox' ), $type->name ,'side','high' );
+			add_meta_box( '_featured_metabox', $label, array( $this,'metabox' ), $this->type,'side','high' );
 		endif;
 	}
 
@@ -158,13 +158,14 @@ class Featured_Items_Metabox {
 		$featured = get_post_meta( $post_id, '_featured', true );
 
 		if ( $featured == 'yes' )
-			update_post_meta( $post_id, '_featured', 'no');
+			update_post_meta( $post_id, '_featured', 'no' );
 		else
-			update_post_meta( $post_id, '_featured', 'yes');
+			update_post_meta( $post_id, '_featured', 'yes' );
 
 		// redirect back to where we came from
 		wp_safe_redirect( remove_query_arg( array('trashed', 'untrashed', 'deleted', 'ids'), wp_get_referer() ) );
 
+		die();
 	}
 
 
@@ -210,7 +211,7 @@ class Featured_Items_Metabox {
 		switch ( $column ) {
 			case "featured":
 
-				$ajax_url = add_query_arg( array('action' => 'featured_items_quickedit',
+				$ajax_url = add_query_arg( array( 'action' => 'featured_items_quickedit',
 									'featured_id' => $post_id,
 									'post_type' => $this->type ), admin_url('admin-ajax.php') );
 
@@ -238,7 +239,6 @@ class Featured_Items_Metabox {
 
 	function register_sortable( $columns ) {
 	    $columns['featured'] = 'featured';
-
 	    return $columns;
 	}
 
@@ -265,6 +265,8 @@ class Featured_Items_Metabox {
 	 */
 	function quick_edit_custom_box( $column_name, $screen ) {
 		if ( $screen != $this->type || $column_name != 'featured' ) return false;
+
+		global $post; 
 
 	    //needs the same name as metabox nonce
 	    wp_nonce_field( 'featured_nonce', '_featured_nonce' );
