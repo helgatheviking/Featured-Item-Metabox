@@ -2,9 +2,9 @@
 Contributors: helgatheviking
 Donate link: https://inspirepay.com/pay/helgatheviking
 Tags: metabox, featured
-Requires at least: 3.7.1
-Tested up to: 3.7.1
-Stable tag: 1.1.3
+Requires at least: 3.8
+Tested up to: 3.8
+Stable tag: 1.1.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -101,6 +101,9 @@ http://scribu.net/wordpress/advanced-metadata-queries.html
 Please report any issues at: https://github.com/helgatheviking/Featured-Item-Metabox/issues
 
 == Changelog ==
+
+= 1.1.4 =
+* verify WP 3.8 compatibility
 
 = 1.1.3 =
 * fix more warnings. props @pushka
