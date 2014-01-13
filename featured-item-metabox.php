@@ -29,14 +29,63 @@ License: GPL2
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 
-if ( ! class_exists( 'Featured_Items_Metabox_Plugin' ) ) :
+if ( ! class_exists( 'Featured_Item_Metabox_Plugin' ) ) :
 
-  class Featured_Items_Metabox_Plugin {
+  final class Featured_Item_Metabox_Plugin {
 
-  	function __construct(){
+    /**
+     * @var WooCommerce The single instance of the class
+     * @since 1.2
+     */
+    protected static $_instance = null;
+
+    /**
+     * Main Featured_Item_Metabox_Plugin Instance
+     *
+     * Ensures only one instance of Featured_Item_Metabox_Plugin is loaded or can be loaded.
+     *
+     * @since 1.2
+     * @static
+     * @see Featured_Item_Metabox()
+     * @return Featured_Item_Metabox_Plugin - Main instance
+     */
+    public static function instance() {
+      if ( is_null( self::$_instance ) ) {
+        self::$_instance = new self();
+      }
+      return self::$_instance;
+    }
+
+    /**
+     * Cloning is forbidden.
+     *
+     * @since 1.2
+     */
+    public function __clone() {
+      _doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh?' ), '2.1' );
+    }
+
+    /**
+     * Unserializing instances of this class is forbidden.
+     *
+     * @since 1.2
+     */
+    public function __wakeup() {
+      _doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh?' ), '2.1' );
+    }
+
+
+    /**
+     * Class Constructor
+     * 
+     * @return void
+     * @since  1.0
+     */
+
+  	public function __construct(){
 
 	    // Include required files
-	    include_once( 'inc/class.Featured_Items_Metabox.php' );
+	    include_once( 'inc/class.Featured_Item_Metabox.php' );
 
 	    // Set-up Action and Filter Hooks
 	    register_uninstall_hook( __FILE__, array( __CLASS__,'delete_plugin_options' ) );
@@ -49,7 +98,7 @@ if ( ! class_exists( 'Featured_Items_Metabox_Plugin' ) ) :
       $options = get_option('featured_items_metabox_options', false );
 
       if( isset( $options['types'] ) ) foreach( $options['types'] as $type ) {
-         $this->{$type} = new Featured_Items_Metabox( $type );
+         $this->{$type} = new Featured_Item_Metabox( $type );
       }
 
 	    //register settings
@@ -64,55 +113,66 @@ if ( ! class_exists( 'Featured_Items_Metabox_Plugin' ) ) :
     }
 
 
-  // --------------------------------------------------------------------------------------
-  // CALLBACK FUNCTION FOR: register_uninstall_hook(__FILE__,  array($this,'delete_plugin_options'))
-  // --------------------------------------------------------------------------------------
+  /**
+   * Uninstall Hook - possibily delete plugin options
+   * @return void
+   * @since  1.0
+   */
 
-  // Delete options table entries ONLY when plugin deactivated AND deleted
-  public static function delete_plugin_options() {
+  public function delete_plugin_options() {
     $options = get_option( 'Featured_Items', true );
     if( isset( $options['delete'] ) && $options['delete'] ) delete_option( 'featured_items_metabox_options' );
   }
 
-  // ------------------------------------------------------------------------------
-  // CALLBACK FUNCTION FOR: add_action('plugins_loaded', array($this,'load_text_domain' ))
-  // ------------------------------------------------------------------------------
+  /**
+   * Make Plugin translation ready
+   * @return void
+   * @since  1.0
+   */
 
-    function load_text_domain() {
+  public function load_text_domain() {
       load_plugin_textdomain( 'featured-items-metabox', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
     }
 
-  // ------------------------------------------------------------------------------
-  // CALLBACK FUNCTION FOR: add_action('admin_init', 'admin_init' )
-  // ------------------------------------------------------------------------------
+  /**
+   * White-list our plugin's options
+   * @return void
+   * @since  1.0
+   */
 
-  // Init plugin options to white list our options
-  function admin_init(){
+  public function admin_init(){
     register_setting( 'featured_items_metabox_options', 'featured_items_metabox_options', array( $this,'validate_options' ) );
   }
 
+  /**
+   * Add options page
+   * @return void
+   * @since  1.0
+   */
 
-  // ------------------------------------------------------------------------------
-  // CALLBACK FUNCTION FOR: add_action('admin_menu', 'add_options_page');
-  // ------------------------------------------------------------------------------
-
-  // Add menu page
-  function add_options_page() {
+  public function add_options_page() {
     add_options_page(__( 'Featured Items Metabox Options Page', 'featured-items-metabox' ), __( 'Featured Items Metabox', 'featured-items-metabox' ), 'manage_options', 'featured-items-metabox', array( $this,'render_form' ) );
   }
 
 
-  // ------------------------------------------------------------------------------
-  // CALLBACK FUNCTION SPECIFIED IN: add_options_page()
-  // ------------------------------------------------------------------------------
+  /**
+   * Render the Plugin options form
+   * @return void
+   * @since  1.0
+   */
 
-  // Render the Plugin options form
-  function render_form(){
+  public function render_form(){
     include( 'inc/plugin-options.php' );
   }
 
-  // Sanitize and validate input. Accepts an array, return a sanitized array.
-  function validate_options( $input ){
+  /**
+   * Sanitize and validate input
+   * @param  array $input
+   * @return array
+   * @since  1.0
+   */
+
+  public function validate_options( $input ){
 
     $clean = array();
 
@@ -128,9 +188,15 @@ if ( ! class_exists( 'Featured_Items_Metabox_Plugin' ) ) :
     return $clean;
   }
 
+  /**
+   * Display a Settings link on the main Plugins page
+   * @param  array $links
+   * @param  string $file
+   * @return array
+   * @since  1.0
+   */
 
-  // Display a Settings link on the main Plugins page
-  function add_action_links( $links, $file ) {
+  public function add_action_links( $links, $file ) {
 
     if ( $file == plugin_basename( __FILE__ ) ) {
       $plugin_link = '<a href="'.admin_url( 'options-general.php?page=featured-items-metabox' ) . '">' . __( 'Settings' ) . '</a>';
@@ -144,8 +210,16 @@ if ( ! class_exists( 'Featured_Items_Metabox_Plugin' ) ) :
 } // end class
 endif;
 
+
 /**
-* Launch the whole plugin
+ * Returns the main instance of Featured_Item_Metabox_Plugin to prevent the need to use globals.
+ *
+ * @since  1.2
+ * @return Featured_Item_Metabox
 */
-global $Featured_Items;
-$Featured_Items = new Featured_Items_Metabox_Plugin();
+function Featured_Item_Metabox() {
+  return Featured_Item_Metabox_Plugin::instance();
+}
+
+// Global for backwards compatibility.
+$GLOBALS['Featured_Items'] = Featured_Item_Metabox();
