@@ -62,7 +62,7 @@ endif;
 wp_reset_postdata();
 ```
 
-Multiple queries per page load can slow down your site so it is worthwhile to take advantage of the [Transients API](http://codex.wordpress.org/Transients_API). 
+Multiple queries per page load can slow down your site so it is worthwhile to take advantage of the [Transients API](http://codex.wordpress.org/Transients_API), so an alternate usage would be:
 
 ```
 // Get any existing copy of our transient data
@@ -126,7 +126,7 @@ add_action( 'save_post', 'save_post_delete_featured_transient' );
 
 Simple queries should only need the `meta_key` and `meta_value` parameters, but if you need something more advanced then you might want to read about how to use the more [complex Meta Query parameters](http://scribu.net/wordpress/advanced-metadata-queries.html).
 
-= Support =
+## Support
 
 Support is handled in the [WordPress forums](http://wordpress.org/support/plugin/featured-item-metabox).  Please note that support is limited and does not cover any custom implementation of the plugin. 
 

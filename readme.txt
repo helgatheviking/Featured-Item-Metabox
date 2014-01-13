@@ -57,7 +57,7 @@ endif;
 wp_reset_postdata();
 `
 
-Multiple queries per page load can slow down your site so it is worthwhile to take advantage of the [Transients API](http://codex.wordpress.org/Transients_API). 
+Multiple queries per page load can slow down your site so it is worthwhile to take advantage of the [Transients API](http://codex.wordpress.org/Transients_API), so an alternate usage would be:
 
 `
 // Get any existing copy of our transient data
