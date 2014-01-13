@@ -28,7 +28,7 @@
 
                         <?php
 
-                        $types = get_post_types( false, 'objects' );
+                        $types = get_post_types( array( 'public' => true ), 'objects' );
                         ksort( $types );
 
 
