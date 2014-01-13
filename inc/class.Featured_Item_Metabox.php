@@ -2,14 +2,30 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-if( ! class_exists( 'Featured_Items_Metabox' ) ) :
+if( ! class_exists( 'Featured_Item_Metabox' ) ) :
 
-class Featured_Items_Metabox {
+class Featured_Item_Metabox {
 
-	public $taxonomy = null;
-	public $type_obj = null;
+    /**
+     * @var type - the post type
+     * @since 1.2
+     */
 	public $type = null;
 
+    /**
+     * @var post_obj - the post type's object
+     * @since 1.2
+     */
+    public $type_obj = null;
+
+    /**
+     * Class Constructor
+     *
+     * @param  string $type - the post type
+     * @return Featured_Item_Metabox()
+     * @since  1.0
+     */
+    
 	public function __construct( $type ){
 
 		$this->type = $type;
@@ -39,9 +55,10 @@ class Featured_Items_Metabox {
 	}
 
 	/**
-	 * Set up the taxonomy object
-	 * need to do this after all custom taxonomies are registered
+	 * Set up the post type object
+	 * need to do this after all custom post types are registered
 	 *
+	 * @return object type_obj
 	 * @since 1.0
 	 */
 	public function get_post_type_object(){
@@ -51,12 +68,13 @@ class Featured_Items_Metabox {
 	/**
 	 * Add our new customized metabox
 	 *
+	 * @return void
 	 * @since 1.0
 	 */
 	public function add_meta_box() {
 		if( ! is_wp_error( $this->type_obj ) ):
 			$label = __( 'Featured Item', 'featured-items-metabox' );
-			add_meta_box( '_featured_metabox', $label, array( $this,'metabox' ), $this->type,'side','high' );
+			add_meta_box( '_featured_metabox', $label, array( $this,'metabox' ), $this->type, 'side', 'high' );
 		endif;
 	}
 
@@ -64,9 +82,11 @@ class Featured_Items_Metabox {
 	/**
 	 * Callback to set up the metabox
 	 *
+	 * @param  object $post - the post object
+	 * @return  print HTML for metabox
 	 * @since 1.0
 	 */
-	public function metabox( $post, $box ) {
+	public function metabox( $post ) {
 
 		//get current terms
 		$featured = ( 'yes' == get_post_meta( $post->ID, '_featured', true ) ) ? 'yes' : 'no';
@@ -86,9 +106,11 @@ class Featured_Items_Metabox {
 	/**
 	 * Only ever save a single term
 	 *
+	 * @param  int $post_id
+	 * @return $post_id
 	 * @since 1.0
 	 */
-	function save_meta ( $post_id ) {
+	public function save_meta ( $post_id ) {
 
 		// make sure we're on a supported post type
 		$options = get_option('featured_items_metabox_options', false);
@@ -131,7 +153,7 @@ class Featured_Items_Metabox {
 	 * @return void
 	 * Props to WooTheme's WooCommerce
 	 */
-	function ajax_callback() {
+	public function ajax_callback() {
 
 		if ( ! is_admin() )
 			die();
@@ -179,9 +201,10 @@ class Featured_Items_Metabox {
 	/**
 	 * Add extra columns for radio taxonomies on the edit screen
 	 *
+	 * @return void
 	 * @since 1.0
 	 */
-	function add_columns_init() {
+	public function add_columns_init() {
 
 		$screen = get_current_screen();
 
@@ -199,9 +222,11 @@ class Featured_Items_Metabox {
 	/**
 	 * Add New Custom Columns
 	 *
+	 * @param array $columns
+	 * @return array
 	 * @since 1.0
 	 */
-	function add_column( $columns ) {
+	public function add_column( $columns ) {
 		$columns['featured'] = __( 'Featured', 'featured-items-metabox' );
 		return $columns;
 	}
@@ -209,9 +234,12 @@ class Featured_Items_Metabox {
 	/**
 	 * New Custom Column content
 	 *
+	 * @param string $column
+	 * @param int $post_id
+	 * @return print HTML for column
 	 * @since 1.0
 	 */
-	function custom_column( $column, $post_id ) {
+	public function custom_column( $column, $post_id ) {
 		global $post;
 
 		switch ( $column ) {
@@ -240,10 +268,12 @@ class Featured_Items_Metabox {
 	/**
 	 * Register the column as sortable
 	 *
+	 * @param array $columns
+	 * @return array
 	 * @since 1.0
 	 */
 
-	function register_sortable( $columns ) {
+	public function register_sortable( $columns ) {
 	    $columns['featured'] = 'featured';
 	    return $columns;
 	}
@@ -251,9 +281,11 @@ class Featured_Items_Metabox {
 	/**
 	 * Change the sort order of the column
 	 *
+	 * @param array $vars
+	 * @return array
 	 * @since 1.0
 	 */
-	function column_orderby( $vars ) {
+	public function column_orderby( $vars ) {
 	    if ( is_admin() && isset( $vars['orderby'] ) && 'featured' == $vars['orderby'] ) {
 	        $vars = array_merge( $vars, array(
 	            'meta_key' => '_featured'
@@ -267,9 +299,12 @@ class Featured_Items_Metabox {
 	/**
 	 * Quick edit form
 	 *
+	 * @param string $column_name
+	 * @param object $screen
+	 * @return print HTML
 	 * @since 1.0
 	 */
-	function quick_edit_custom_box( $column_name, $screen ) {
+	public function quick_edit_custom_box( $column_name, $screen ) {
 		if ( $screen != $this->type || $column_name != 'featured' ) return false;
 
 		global $post; 
