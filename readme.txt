@@ -141,8 +141,11 @@ Please report any bugs, errors, warnings, code problems at [Github](https://gith
 
 == Changelog ==
 
-= 1.1.5 =
+= 1.2 =
+* switching to singular instance of plugin, to prevent the need to use globals (global still there for backcompat)
 * don't show private post types as possibilities in options 
+* update documentaion
+* update docbloc
 
 = 1.1.4 =
 * verify WP 3.8 compatibility
