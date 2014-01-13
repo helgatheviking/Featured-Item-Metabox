@@ -79,7 +79,7 @@ if ( ! class_exists( 'Featured_Items_Metabox_Plugin' ) ) :
   // ------------------------------------------------------------------------------
 
     function load_text_domain() {
-      load_plugin_textdomain( "featured-items-metabox", false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+      load_plugin_textdomain( 'featured-items-metabox', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
     }
 
   // ------------------------------------------------------------------------------
@@ -98,7 +98,7 @@ if ( ! class_exists( 'Featured_Items_Metabox_Plugin' ) ) :
 
   // Add menu page
   function add_options_page() {
-    add_options_page(__( 'Featured Items Metabox Options Page',"featured-items-metabox" ), __( 'Featured Items Metabox', "featured-items-metabox" ), 'manage_options', 'featured-items-metabox', array( $this,'render_form' ) );
+    add_options_page(__( 'Featured Items Metabox Options Page', 'featured-items-metabox' ), __( 'Featured Items Metabox', 'featured-items-metabox' ), 'manage_options', 'featured-items-metabox', array( $this,'render_form' ) );
   }
 
 
