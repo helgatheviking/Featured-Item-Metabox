@@ -3,7 +3,7 @@
 Plugin Name: Featured Item Metabox
 Plugin URI: http://wordpress.org/extend/plugins/featured-item-metabox/
 Description: Quickly add a metabox to any post type for marking a post as featured.
-Version: 1.2
+Version: 1.2.1
 Author: Kathy Darling
 Author URI: http://www.kathyisawesome.com
 License: GPL2
