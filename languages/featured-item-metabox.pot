@@ -1,0 +1,94 @@
+# Copyright (C) 2014 Featured Item Metabox
+# This file is distributed under the same license as the Featured Item Metabox package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Featured Item Metabox 1.2.1\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/featured-item-metabox\n"
+"POT-Creation-Date: 2014-02-27 13:31:17+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2014-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: featured-item-metabox.php:65 featured-item-metabox.php:74
+msgid "Cheatin&#8217; huh?"
+msgstr ""
+
+#: featured-item-metabox.php:154
+msgid "Featured Items Metabox Options Page"
+msgstr ""
+
+#: featured-item-metabox.php:154 inc/plugin-options.php:15
+msgid "Featured Items Metabox"
+msgstr ""
+
+#: featured-item-metabox.php:202
+msgid "Settings"
+msgstr ""
+
+#: inc/class.Featured_Item_Metabox.php:77
+msgid "Featured %s"
+msgstr ""
+
+#: inc/class.Featured_Item_Metabox.php:97
+#: inc/class.Featured_Item_Metabox.php:235
+msgid "Featured"
+msgstr ""
+
+#: inc/class.Featured_Item_Metabox.php:162
+msgid "You have taken too long. Please go back and retry."
+msgstr ""
+
+#: inc/class.Featured_Item_Metabox.php:175
+#: inc/class.Featured_Item_Metabox.php:177
+msgid "You do not have sufficient permissions to access this page."
+msgstr ""
+
+#: inc/class.Featured_Item_Metabox.php:259
+msgid "Toggle featured"
+msgstr ""
+
+#: inc/class.Featured_Item_Metabox.php:261
+msgid "yes"
+msgstr ""
+
+#: inc/class.Featured_Item_Metabox.php:263
+msgid "no"
+msgstr ""
+
+#: inc/class.Featured_Item_Metabox.php:332
+msgid "Featured Item"
+msgstr ""
+
+#: inc/plugin-options.php:26
+msgid "Select Post Types"
+msgstr ""
+
+#: inc/plugin-options.php:48
+msgid "Completely remove options on plugin removal"
+msgstr ""
+
+#: inc/plugin-options.php:58
+msgid "Save Changes"
+msgstr ""
+#. Plugin Name of the plugin/theme
+msgid "Featured Item Metabox"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "http://wordpress.org/extend/plugins/featured-item-metabox/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "Quickly add a metabox to any post type for marking a post as featured."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Kathy Darling"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://www.kathyisawesome.com"
+msgstr ""
