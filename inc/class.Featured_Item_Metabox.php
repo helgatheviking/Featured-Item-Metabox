@@ -44,6 +44,7 @@ class Featured_Item_Metabox {
 
 		//save featured meta
 		add_action( 'save_post', array( $this, 'save_meta' ) );
+		add_action( 'edit_attachment', array( $this, 'save_meta' ) );
 
 		//add to quick edit - irrelevant for wp 3.4.2
 		add_action( 'quick_edit_custom_box', array( $this, 'quick_edit_custom_box' ), 10, 2);
@@ -206,15 +207,19 @@ class Featured_Item_Metabox {
 	 */
 	public function add_columns_init() {
 
-		$screen = get_current_screen();
-
-		if ( isset( $screen->base ) && 'edit' != $screen->base ) return;
-
-			//add some hidden data that we'll need for the quickedit
+		// set up the columns
+		// the attachment post type using a different naming structure
+		if( $this->type == 'attachment' ) {
+			add_filter( "manage_media_columns", array( $this, 'add_column' ) );
+			add_action( "manage_media_custom_column", array( $this, 'custom_column' ), 99, 2);
+			add_filter( "manage_upload_sortable_columns", array( $this, 'register_sortable' ) );
+		} else {
 			add_filter( "manage_{$this->type}_posts_columns", array( $this, 'add_column' ) );
 			add_action( "manage_{$this->type}_posts_custom_column", array( $this, 'custom_column' ), 99, 2);
 			add_filter( "manage_edit-{$this->type}_sortable_columns", array( $this, 'register_sortable' ) );
-			add_filter( 'request', array( $this, 'column_orderby' ) );
+		}
+
+		add_filter( 'request', array( $this, 'column_orderby' ) );
 
 	}
 

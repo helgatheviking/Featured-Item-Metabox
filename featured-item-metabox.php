@@ -91,7 +91,7 @@ if ( ! class_exists( 'Featured_Item_Metabox_Plugin' ) ) :
 	    register_uninstall_hook( __FILE__, array( __CLASS__,'delete_plugin_options' ) );
 
 	    //load plugin text domain for translations
-	    add_action( 'plugins_loaded', array( $this,'load_text_domain' ) );
+	    add_action( 'plugins_loaded', array( $this, 'load_text_domain' ) );
 
       //create a class property for each taxonomy that we are converting to radio buttons
       //for example: $this->categories
