@@ -354,8 +354,8 @@ class Featured_Item_Metabox {
     	if ( $screen->base != "edit" ||  ! isset( $options['types'] ) || ! in_array( $screen->post_type, $options ) ) 
     		return;
 
-    	$suffix = defined( WP_SCRIPT_DEBUG )  && WP_SCRIPT_DEBUG ? '' : '.min';
-
+    	$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
+ 
 		wp_enqueue_script( 'featured-item', plugins_url( 'js/featureditem' . $suffix . '.js', dirname(__FILE__) ), array( 'jquery' ), null, true );
 
     }
