@@ -3,7 +3,7 @@ Contributors: helgatheviking
 Donate link: https://inspirepay.com/pay/helgatheviking
 Tags: metabox, featured
 Requires at least: 3.8
-Tested up to: 3.8
+Tested up to: 3.9
 Stable tag: 1.2.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
