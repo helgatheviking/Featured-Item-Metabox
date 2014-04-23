@@ -74,7 +74,7 @@ class Featured_Item_Metabox {
 	 */
 	public function add_meta_box() {
 		if( ! is_wp_error( $this->type_obj ) ):
-			$label = sprintf( __( 'Featured %s', 'featured-items-metabox' ), $this->type_obj->labels->singular_name );
+			$label = apply_filters( 'featured_items_metabox_label', sprintf( __( 'Featured %s', 'featured-items-metabox' ), $this->type_obj->labels->singular_name ), $this->type );
 			add_meta_box( '_featured_metabox', $label, array( $this,'metabox' ), $this->type, 'side', 'high' );
 		endif;
 	}
@@ -94,7 +94,7 @@ class Featured_Item_Metabox {
 
 		?>
 		<div id="featured-items">
-			<input type="checkbox" name="featured" class="featured-item" id="featured-item" value="1" <?php checked( 'yes', $featured );?> /> <label for="featured-item"><?php _e('Featured', 'featured-items-metabox');?></label>
+			<input type="checkbox" name="featured" class="featured-item" id="featured-item" value="1" <?php checked( 'yes', $featured );?> /> <label for="featured-item"><?php echo apply_filters( 'featured_items_checkbox_label', __( 'Featured', 'featured-items-metabox' ), $this->type );?></label>
 
 			<br>
 		</div>
