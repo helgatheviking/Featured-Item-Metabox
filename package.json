@@ -1,7 +1,7 @@
 {
   "title": "Featured Item Metabox",
   "name": "featured-item-metabox",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Simple UI for setting a post as featured",
   "main": "Gruntfile.js",
   "license": "GPL",
