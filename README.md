@@ -3,8 +3,8 @@
 **Donate link:** https://inspirepay.com/pay/helgatheviking  
 **Tags:** metabox, featured  
 **Requires at least:** 3.8  
-**Tested up to:** 4.2  
-**Stable tag:** 1.2.3  
+**Tested up to:** 4.3    
+**Stable tag:** 1.2.4  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -146,6 +146,10 @@ Please report any bugs, errors, warnings, code problems at [Github](https://gith
 
 
 ## Changelog ##
+
+### 1.2.4 ###
+* testing against WP4.3
+* improved code formatting
 
 ### 1.2.3 ###
 * add featured_items_metabox_label filter
