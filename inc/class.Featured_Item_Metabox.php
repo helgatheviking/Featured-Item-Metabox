@@ -232,7 +232,7 @@ class Featured_Item_Metabox {
 	 * @since 1.0
 	 */
 	public function add_column( $columns ) {
-		$columns['featured'] = __( 'Featured', 'featured-items-metabox' );
+		$columns['featured'] = sprintf( '<span class="dashicons-before dashicons-star-filled" title="%1$s"><span class="screen-reader-text">%1$s</span></span>', __( 'Featured', 'featured-items-metabox' ) );
 		return $columns;
 	}
 
