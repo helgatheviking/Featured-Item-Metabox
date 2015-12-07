@@ -85,7 +85,7 @@ module.exports = function(grunt) {
 				'!*.sublime-project',
 				'!*.transifexrc',
 				'!deploy.sh',
-				'!assets/**',
+				'!wp-assets/**',
 				'!readme.md'
 			],
 			dest: 'deploy/'

@@ -2,3 +2,5 @@ deploy.sh
 deploy/
 node_modules/
 gitcreds.json
+*.sublime-workspace
+*.sublime-project
