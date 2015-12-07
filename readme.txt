@@ -3,8 +3,8 @@ Contributors: helgatheviking
 Donate link: https://inspirepay.com/pay/helgatheviking
 Tags: metabox, featured
 Requires at least: 3.8
-Tested up to: 4.3  
-Stable tag: 1.2.4
+Tested up to: 4.4.0  
+Stable tag: 1.3.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -140,6 +140,11 @@ Please report any bugs, errors, warnings, code problems at [Github](https://gith
 3. The metabox when editing an individual post
 
 == Changelog ==
+
+= 1.3.0 =
+* testing against WP4.4
+* on posts overview page, use ajax to toggle featured on/off
+* replace star images with dashicons
 
 = 1.2.4 =
 * testing against WP4.3
