@@ -256,13 +256,19 @@ class Featured_Item_Metabox {
 
 				$url = wp_nonce_url( $ajax_url, 'featured-items-metabox' );
 
-				echo '<a href="' . $url . '" title="'. __( 'Toggle featured', 'featured-items-metabox' ) . '">';
-				if ( 'yes' == ( $featured = get_post_meta ( $post_id, '_featured', true ) ) ) {
-					echo '<img src="' . plugins_url( 'images/featured.png', __FILE__ ) . '" alt="'. __( 'yes', 'featured-items-metabox' ) . '" height="14" width="14" />';
+				if( 'yes' == ( $featured = get_post_meta ( $post_id, '_featured', true ) ) ){
+					$class = 'dashicons-star-filled';
 				} else {
-					echo '<img src="' . plugins_url( 'images/featured-off.png', __FILE__ ) . '"" alt="'. __( 'no', 'featured-items-metabox' ) . '" height="14" width="14" />';
+					$class = 'dashicons-star-empty';
 				}
-				echo '</a>';
+				printf( '<a href="%s" title="%s" class="featured-toggle dashicons-before %s" data-featured_id="%d" data-post_type="%s" data-nonce="%s"></a>', 
+						$url,
+						__( 'Toggle featured', 'featured-items-metabox' ),
+						$class,
+						$post_id,
+						$this->type,
+						wp_create_nonce( 'featured-items-metabox' )
+					);
 			echo '<div id="featured-' . $post_id.'" class="hidden featured-value '. $this->type . '">' . $featured . '</div>';
 			break;
 		}
