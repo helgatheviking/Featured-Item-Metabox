@@ -156,45 +156,55 @@ class Featured_Item_Metabox {
 	 */
 	public function ajax_callback() {
 
-		if ( ! is_admin() )
-			die();
+		if ( ! is_admin() ){
+			die(-1);
+		}
 
-	  	if ( ! check_admin_referer('featured-items-metabox')) wp_die( __( 'You have taken too long. Please go back and retry.', 'featured-items-metabox' ) );
+	  	if ( ! check_admin_referer( 'featured-items-metabox' ) ) {
+	  		die( __( 'You have taken too long. Please go back and retry.', 'featured-items-metabox' ) );
+	  	}
 
 	  	// get the post ID
-		$post_id = isset( $_GET['featured_id'] ) && (int) $_GET['featured_id'] ? (int) $_GET['featured_id'] : '';
+		$post_id = isset( $_REQUEST['featured_id'] ) && (int) $_REQUEST['featured_id'] ? (int) $_REQUEST['featured_id'] : '';
 
 		// get the post type
-		$post_type = isset( $_GET['post_type'] ) ? $_GET['post_type']: '';
+		$post_type = isset( $_REQUEST['post_type'] ) ? $_REQUEST['post_type']: '';
 
-		if ( ! $post_id || ! $post_type )
-			die();
+		// are we really doing ajax
+		$doing_ajax = isset( $_REQUEST['doing_ajax'] ) && $_REQUEST['doing_ajax'] === '1' ? true : false;
+
+		if ( ! $post_id || ! $post_type ){
+			die(-1);
+		}
 
 		// Check permissions
 	  	if ( 'page' == $post_type ) {
-	    	if ( ! current_user_can( 'edit_page', $post_id ) ) wp_die( __( 'You do not have sufficient permissions to access this page.', 'featured-items-metabox' ) );
+	    	if ( ! current_user_can( 'edit_page', $post_id ) ) {
+	    		wp_die( __( 'You do not have sufficient permissions to access this page.', 'featured-items-metabox' ) );
+	    	}
 	  	} else {
-	    	if ( ! current_user_can( 'edit_post', $post_id ) ) wp_die( __( 'You do not have sufficient permissions to access this page.', 'featured-items-metabox' ) );
+	    	if ( ! current_user_can( 'edit_post', $post_id ) ) {
+	    		wp_die( __( 'You do not have sufficient permissions to access this page.', 'featured-items-metabox' ) );
+	    	}
 	  	}
-
-	  	$options = get_option('featured_items_metabox_options', false );
-		$types = isset($options['types']) ? $options['types'] : array();
-
-		if ( ! in_array( $post_type, $types ) )
-			die();
 
 		// since it is 'toggle' get the featured status and set to opposite
 		$featured = get_post_meta( $post_id, '_featured', true );
 
-		if ( $featured == 'yes' )
-			update_post_meta( $post_id, '_featured', 'no' );
-		else
-			update_post_meta( $post_id, '_featured', 'yes' );
+		if ( $featured == 'yes' ){
+			$featured = 'no';
+			update_post_meta( $post_id, '_featured', $featured );
+		} else {
+			$featured = 'yes';
+			update_post_meta( $post_id, '_featured', $featured );
+		}
 
-		// redirect back to where we came from
-		wp_safe_redirect( remove_query_arg( array('trashed', 'untrashed', 'deleted', 'ids'), wp_get_referer() ) );
-
-		die();
+		if( $doing_ajax ){
+			die($featured);
+		} else {
+			// redirect back to where we came from
+			wp_safe_redirect( remove_query_arg( array('trashed', 'untrashed', 'deleted', 'ids'), wp_get_referer() ) );
+		}
 	}
 
 

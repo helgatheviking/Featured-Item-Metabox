@@ -5,7 +5,7 @@
  *
  */
 
-	$('#the-list').on('click', '.editinline', function(){
+	$('#the-list').on('click', '.editinline', function(e){
 
 		// reset
 		inlineEditPost.revert();
@@ -20,6 +20,43 @@
 	});
 
 
+	$('#the-list').on('click', '.featured-toggle', function(e){
 
+		e.preventDefault();
+
+		var $othis = $(this); //cache the link
+	
+		var $spinner = $(document.createElement('span')).addClass('spinner').css( { 'visibility': 'visible', 'float': 'none', 'margin': '0' } );
+
+		featured_id = $(this).data('featured_id');
+		post_type = $(this).data('post_type');
+		_wpnonce = $(this).data('nonce');
+
+		$.ajax({
+			type: 'POST',
+			url: ajaxurl,
+			data: {
+				action: 'featured_items_quickedit',
+				_wpnonce: _wpnonce,
+				featured_id: featured_id,
+				post_type: post_type,
+				doing_ajax: 1
+			},
+			beforeSend: function( xhr ) {
+			    $othis.before($spinner).hide();
+			},
+			success:function(response) {
+		    	if( response == 'yes' ){
+					$othis.removeClass('dashicons-star-empty').addClass('dashicons-star-filled');
+				} else if ( response == 'no' ){
+					$othis.removeClass('dashicons-star-filled').addClass('dashicons-star-empty');
+				}
+		    }
+		}).done(function(response) {
+			$othis.prev('.spinner').remove();
+			$othis.show();
+		});
+
+	});
 
 })(jQuery);
