@@ -48,8 +48,10 @@
 			success:function(response) {
 		    	if( response == 'yes' ){
 					$othis.removeClass('dashicons-star-empty').addClass('dashicons-star-filled');
+					$othis.next('.featured-value' ).text('yes');
 				} else if ( response == 'no' ){
 					$othis.removeClass('dashicons-star-filled').addClass('dashicons-star-empty');
+					$othis.next('.featured-value' ).text('no');
 				}
 		    }
 		}).done(function(response) {
