@@ -4,7 +4,7 @@ Donate link: https://inspirepay.com/pay/helgatheviking
 Tags: metabox, featured
 Requires at least: 3.8
 Tested up to: 4.4.0  
-Stable tag: 1.3.0
+Stable tag: 1.3.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -140,6 +140,9 @@ Please report any bugs, errors, warnings, code problems at [Github](https://gith
 3. The metabox when editing an individual post
 
 == Changelog ==
+
+= 1.3.1 =
+* fixes problem of quick edit not adjusting to toggle
 
 = 1.3.0 =
 * testing against WP4.4
