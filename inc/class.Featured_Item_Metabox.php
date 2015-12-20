@@ -372,7 +372,7 @@ class Featured_Item_Metabox {
 
     	$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
  
-		wp_enqueue_script( 'featured-item', plugins_url( 'js/featureditem' . $suffix . '.js', dirname(__FILE__) ), array( 'jquery' ), null, true );
+		wp_enqueue_script( 'featured-item', plugins_url( 'js/featureditem' . $suffix . '.js', dirname(__FILE__) ), array( 'jquery' ), Featured_Item_Metabox()->version, true );
 
     }
 

@@ -40,6 +40,12 @@ if ( ! class_exists( 'Featured_Item_Metabox_Plugin' ) ) :
 		protected static $_instance = null;
 
 		/**
+		 * @var KIA_Subtitle The single instance of the class
+		 * @since 1.3.2
+		 */
+		public $version = '1.3.2';
+
+		/**
 		 * Main Featured_Item_Metabox_Plugin Instance
 		 *
 		 * Ensures only one instance of Featured_Item_Metabox_Plugin is loaded or can be loaded.
