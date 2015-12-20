@@ -52,7 +52,6 @@ class Featured_Item_Metabox {
 		//add quick edit scripts
  		add_action( 'admin_enqueue_scripts', array( $this, 'admin_script' ) );
 
-
 	}
 
 	/**
@@ -365,10 +364,11 @@ class Featured_Item_Metabox {
     public function admin_script(){
 
     	$screen = get_current_screen();
-    	$options = get_option('featured_items_metabox_options', false);
+    	$options = get_option( 'featured_items_metabox_options', false );
 
-    	if ( $screen->base != "edit" ||  ! isset( $options['types'] ) || ! in_array( $screen->post_type, $options ) ) 
+    	if ( $screen->base != "edit" ||  ! isset( $options['types'] ) || ! in_array( $screen->post_type, $options['types'] ) ){
     		return;
+    	}
 
     	$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
  
