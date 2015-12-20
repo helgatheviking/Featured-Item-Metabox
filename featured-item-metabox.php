@@ -34,7 +34,7 @@ if ( ! class_exists( 'Featured_Item_Metabox_Plugin' ) ) :
 	final class Featured_Item_Metabox_Plugin {
 
 		/**
-		 * @var WooCommerce The single instance of the class
+		 * @var Featured_Item_Metabox_Plugin The single instance of the class
 		 * @since 1.2
 		 */
 		protected static $_instance = null;
