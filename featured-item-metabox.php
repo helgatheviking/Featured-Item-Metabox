@@ -93,9 +93,9 @@ if ( ! class_exists( 'Featured_Item_Metabox_Plugin' ) ) :
 			//load plugin text domain for translations
 			add_action( 'plugins_loaded', array( $this, 'load_text_domain' ) );
 
-			//create a class property for each taxonomy that we are converting to radio buttons
-			//for example: $this->categories
-			$options = get_option('featured_items_metabox_options', false );
+			//create a class property for each post type that is using featured item metabox
+			//for example: $this->posts
+			$options = get_option( 'featured_items_metabox_options', false );
 
 			if( isset( $options['types'] ) ) foreach( $options['types'] as $type ) {
 				 $this->{$type} = new Featured_Item_Metabox( $type );
