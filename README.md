@@ -4,9 +4,9 @@
 **Tags:** metabox, featured  
 **Requires at least:** 3.8  
 **Tested up to:** 4.4.0    
-**License:** GPLv2 or later  
-**License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 **Stable tag:** 1.3.2
+**License:** GPLv3 or later  
+**License URI:** http://www.gnu.org/licenses/gpl-3.0.html  
 
 Quickly add a metabox to any post type for marking a post as featured.  Toggle featured status even more quickly from the posts lists/ quick edit screen.
 
