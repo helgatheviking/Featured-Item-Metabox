@@ -5,7 +5,7 @@ module.exports = function(grunt) {
   // Project configuration.
   grunt.initConfig({
 	pkg: grunt.file.readJSON('package.json'),
-	creds: grunt.file.readJSON('gitcreds.json'),
+
 	uglify: {
 		options: {
 			compress: {
@@ -241,7 +241,7 @@ grunt.registerTask( 'docs', [ 'wp_readme_to_markdown'] );
 
 grunt.registerTask( 'test', [ 'jshint', 'newer:uglify' ] );
 
-grunt.registerTask( 'build', [ 'test', 'newer:uglify', 'makepot', 'shell:txpull', 'newer:po2mo', 'wp_readme_to_markdown', 'clean', 'copy' ] );
+grunt.registerTask( 'build', [ 'test', 'newer:uglify', 'makepot', 'newer:po2mo', 'wp_readme_to_markdown', 'clean', 'copy' ] );
 
 // bump version numbers 
 // grunt release		1.4.1 -> 1.4.2
