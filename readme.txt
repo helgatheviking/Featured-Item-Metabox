@@ -1,6 +1,6 @@
 === Featured Item Metabox ===
 Contributors: helgatheviking
-Donate link: https://inspirepay.com/pay/helgatheviking
+Donate link: https://www.paypal.com/fundraiser/112574644767835624/charity/1451316
 Tags: metabox, featured
 Requires at least: 3.8
 Tested up to: 4.7.0 
