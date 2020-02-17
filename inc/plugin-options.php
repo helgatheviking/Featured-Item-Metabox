@@ -9,9 +9,6 @@
     h2.nav-tab-wrapper { margin-bottom: 1em;}
   </style>
 
-  <!-- Display Plugin Icon, Header, and Description -->
-  <?php screen_icon(); ?>
-
   <h2><?php _e('Featured Items Metabox',"featured-items-metabox");?></h2>
 
   <!-- Beginning of the Plugin Options Form -->
