@@ -3,8 +3,8 @@ Contributors: helgatheviking
 Donate link: https://www.paypal.com/fundraiser/112574644767835624/charity/1451316
 Tags: metabox, featured
 Requires at least: 3.8
-Tested up to: 4.7.0 
 Stable tag: 1.3.2
+Tested up to: 5.3.2 
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
