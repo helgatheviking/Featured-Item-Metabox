@@ -1,10 +1,10 @@
 # Featured Item Metabox #
-**Contributors:** helgatheviking  
-**Donate link:** https://inspirepay.com/pay/helgatheviking  
+**Contributors:** [helgatheviking](https://profiles.wordpress.org/helgatheviking)  
+**Donate link:** https://www.paypal.com/fundraiser/112574644767835624/charity/1451316  
 **Tags:** metabox, featured  
 **Requires at least:** 3.8  
-**Tested up to:** 5.3.2    
-**Stable tag:** 1.4.0
+**Tested up to:** 5.3.2   
+**Stable tag:** 1.4.0  
 **License:** GPLv3 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-3.0.html  
 
@@ -20,104 +20,104 @@ Please note that this plugin, by itself, will not change how your posts are disp
 
 This plugin simply adds a `_featured` meta key to every post with a value of `yes` for featured items and `no` for everything else.  Actual display of the featured items is entirely up to the theme developer, but an example ( place in your template where you'd like to display a list of featured "Portfolios") might be as follows:
 
-`
-// params for our query
-$args = array(
-	'post_type' => 'portfolio',
-   'posts_per_page'  => 5,
-   'meta_key'        => '_featured',
-   'meta_value'      => 'yes'
-);
 
-// The Query
-$featured_portfolios = new WP_Query( $args );
-
-// The Loop
-if ( $featured_portfolios ) :
-
-	echo '<ul class="featured">';
-
-	while ( $featured_portfolios->have_posts() ) :
-		$featured_portfolios->the_post();
-		echo '<li>' . get_the_title() . '</li>';
-	endwhile;
-
-	echo '</ul>';
-
-else :
-
-	echo 'No featured portfolios found.';
-
-endif;
-
-/* Restore original Post Data
-** * NB:** Because we are using new WP_Query we aren't stomping on the  
- * original $wp_query and it does not need to be reset.
-*/
-wp_reset_postdata();
-`
-
-Multiple queries per page load can slow down your site so it is worthwhile to take advantage of the [Transients API](http://codex.wordpress.org/Transients_API), so an alternate usage would be:
-
-`
-// Get any existing copy of our transient data
-if ( false === ( $featured_portfolios = get_transient( 'featured_portfolios' ) ) ) {
-    // It wasn't there, so regenerate the data and save the transient
-
-   // params for our query
+	// params for our query
 	$args = array(
 		'post_type' => 'portfolio',
 	   'posts_per_page'  => 5,
 	   'meta_key'        => '_featured',
 	   'meta_value'      => 'yes'
 	);
-
+	
 	// The Query
 	$featured_portfolios = new WP_Query( $args );
+	
+	// The Loop
+	if ( $featured_portfolios ) :
+	
+		echo '<ul class="featured">';
+	
+		while ( $featured_portfolios->have_posts() ) :
+			$featured_portfolios->the_post();
+			echo '<li>' . get_the_title() . '</li>';
+		endwhile;
+	
+		echo '</ul>';
+	
+	else :
+	
+		echo 'No featured portfolios found.';
+	
+	endif;
+	
+	/* Restore original Post Data
+	 * NB: Because we are using new WP_Query we aren't stomping on the
+	 * original $wp_query and it does not need to be reset.
+	*/
+	wp_reset_postdata();
 
-	// store the transient
-	set_transient( 'featured_portfolios', $featured_portfolios );
 
-}
+Multiple queries per page load can slow down your site so it is worthwhile to take advantage of the [Transients API](http://codex.wordpress.org/Transients_API), so an alternate usage would be:
 
-// Use the data like you would have normally...
 
-// The Loop
-if ( $featured_portfolios ) :
+	// Get any existing copy of our transient data
+	if ( false === ( $featured_portfolios = get_transient( 'featured_portfolios' ) ) ) {
+	    // It wasn't there, so regenerate the data and save the transient
+	
+	   // params for our query
+		$args = array(
+			'post_type' => 'portfolio',
+		   'posts_per_page'  => 5,
+		   'meta_key'        => '_featured',
+		   'meta_value'      => 'yes'
+		);
+	
+		// The Query
+		$featured_portfolios = new WP_Query( $args );
+	
+		// store the transient
+		set_transient( 'featured_portfolios', $featured_portfolios );
+	
+	}
+	
+	// Use the data like you would have normally...
+	
+	// The Loop
+	if ( $featured_portfolios ) :
+	
+		echo '<ul class="featured">';
+	
+		while ( $featured_portfolios->have_posts() ) :
+			$featured_portfolios->the_post();
+			echo '<li>' . get_the_title() . '</li>';
+		endwhile;
+	
+		echo '</ul>';
+	
+	else :
+	
+		echo 'No featured portfolios found.';
+	
+	endif;
+	
+	/* Restore original Post Data
+	 * NB: Because we are using new WP_Query we aren't stomping on the
+	 * original $wp_query and it does not need to be reset.
+	*/
+	wp_reset_postdata();
 
-	echo '<ul class="featured">';
-
-	while ( $featured_portfolios->have_posts() ) :
-		$featured_portfolios->the_post();
-		echo '<li>' . get_the_title() . '</li>';
-	endwhile;
-
-	echo '</ul>';
-
-else :
-
-	echo 'No featured portfolios found.';
-
-endif;
-
-/* Restore original Post Data
-** * NB:** Because we are using new WP_Query we aren't stomping on the  
- * original $wp_query and it does not need to be reset.
-*/
-wp_reset_postdata();
-`
 
 Then to ensure that your featured posts list is updated, add a function to your theme's functions.php to delete the transient when a portfolio (in this example) post type is saved.
 
-`
-// Create a function to delete our transient when a portfolio post is saved
-function save_post_delete_featured_transient( $post_id ) {
-   if ( 'portfolio' == get_post_type( $post_id ) )
-   	delete_transient( 'featured_portfolios' );
-}
-// Add the function to the save_post hook so it runs when posts are saved
-add_action( 'save_post', 'save_post_delete_featured_transient' );
-`
+
+	// Create a function to delete our transient when a portfolio post is saved
+	function save_post_delete_featured_transient( $post_id ) {
+	   if ( 'portfolio' == get_post_type( $post_id ) )
+	   	delete_transient( 'featured_portfolios' );
+	}
+	// Add the function to the save_post hook so it runs when posts are saved
+	add_action( 'save_post', 'save_post_delete_featured_transient' );
+
 
 Simple queries should only need the `meta_key` and `meta_value` parameters, but if you need something more advanced then you might want to read about how to use the more [complex Meta Query parameters](http://scribu.net/wordpress/advanced-metadata-queries.html).
 
@@ -135,17 +135,20 @@ Please report any bugs, errors, warnings, code problems at [Github](https://gith
 
 ## Screenshots ##
 
-### 1. The plugin settings ###
-![The plugin settings](http://s.wordpress.org/extend/plugins/featured-item-metabox/screenshot-1.png)
-
-### 2. Posts overview. Featured status can be changed via quickedit, or by simply clicking on the star icon.  Dark stars are featured whereas hollow stars are not. ###
-![Posts overview. Featured status can be changed via quickedit, or by simply clicking on the star icon.  Dark stars are featured whereas hollow stars are not.](http://s.wordpress.org/extend/plugins/featured-item-metabox/screenshot-2.png)
-
-### 3. The metabox when editing an individual post ###
-![The metabox when editing an individual post](http://s.wordpress.org/extend/plugins/featured-item-metabox/screenshot-3.png)
-
+1. The plugin settings
+2. Posts overview. Featured status can be changed via quickedit, or by simply clicking on the star icon.  Dark stars are featured whereas hollow stars are not.
+3. The metabox when editing an individual post
 
 ## Changelog ##
+
+### 1.4.0 ###
+* Gutenberg compatibility
+
+### 1.3.2 ###
+* fixes bug where toggle script wasn't loading if "remove all" plugin option was checked
+
+### 1.3.1 ###
+* fixes problem of quick edit not adjusting to toggle
 
 ### 1.3.0 ###
 * testing against WP4.4
