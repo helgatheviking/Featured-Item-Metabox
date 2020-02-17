@@ -3,8 +3,8 @@ Contributors: helgatheviking
 Donate link: https://www.paypal.com/fundraiser/112574644767835624/charity/1451316
 Tags: metabox, featured
 Requires at least: 3.8
-Stable tag: 1.3.2
 Tested up to: 5.3.2 
+Stable tag: 1.4.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -140,6 +140,9 @@ Please report any bugs, errors, warnings, code problems at [Github](https://gith
 3. The metabox when editing an individual post
 
 == Changelog ==
+
+= 1.4.0 =
+* Gutenberg compatibility
 
 = 1.3.2 =
 * fixes bug where toggle script wasn't loading if "remove all" plugin option was checked
