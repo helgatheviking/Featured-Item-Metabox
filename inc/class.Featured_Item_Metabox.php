@@ -74,7 +74,17 @@ class Featured_Item_Metabox {
 	public function add_meta_box() {
 		if( ! is_wp_error( $this->type_obj ) ):
 			$label = apply_filters( 'featured_items_metabox_label', sprintf( __( 'Featured %s', 'featured-items-metabox' ), $this->type_obj->labels->singular_name ), $this->type );
-			add_meta_box( '_featured_metabox', $label, array( $this,'metabox' ), $this->type, 'side', 'high' );
+			add_meta_box( 
+				'_featured_metabox', 
+				$label, 
+				array( $this, 'metabox' ), 
+				$this->type, 
+				'side', 
+				'high',
+				array(
+			        '__block_editor_compatible_meta_box' => true,
+			    )
+			);
 		endif;
 	}
 
